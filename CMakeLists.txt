@@ -7,7 +7,7 @@ project(HelloWorld VERSION 1.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Add the executable
+# Add executables
 add_executable(hello_world src/helloWorld/main.cpp)
 add_executable(greet_world src/greet/main.cpp)
 
@@ -40,7 +40,7 @@ target_link_libraries(test_unit PRIVATE greet GTest::gtest_main)
 add_test(NAME unit_main_test COMMAND test_unit)
 
 # Provide the path to the built executable to the test via a compile definition.
-if (WIN32)
+if (CMAKE_GENERATOR MATCHES "Visual Studio")
 	# Visual Studio places executables in configuration subfolders (Debug/Release)
 	set(EXE_SUBDIR $<CONFIG>)
 else()
