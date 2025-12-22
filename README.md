@@ -8,11 +8,11 @@
 
 ## Installation
 
-Setting up a C++ development environment can be non-trivial. The course is setup that most relatively stanadard development environments will work fine, whether you are using Window or Linux. Nor do we perscribe that you use a specific editor or that you an editor at all! However for simplicity here we give instructions on how to use VS Code as your editor and setup a C++ development in Linux or Windows. Microsoft provides a thorough [set of instructions](https://code.visualstudio.com/docs/languages/cpp), but here we will go through some basics and the most pertinent set of instructions.
+Setting up a C++ development environment can be non-trivial. The course is set up so that most relatively standard development environments will work fine, whether you are using Windows or Linux. Nor do we prescribe that you use a specific editor or that you use an editor at all! However for simplicity here we give instructions on how to use VS Code as your editor and setup a C++ development in Linux or Windows. Microsoft provides a thorough [set of instructions](https://code.visualstudio.com/docs/languages/cpp), but here we will go through some basics and the most pertinent set of instructions.
 
 ### Terminal Basics
 
-Many of the folllowing instructions will require use of a terminal. While it is possible to perform these operations purely within a Graphical User Interface (GUI) you will find that you will often run into programs and tools that have no UI, and must be run via a command line interface (CLI), or even if there is a UI it would be faster to type the necessary commands. The following instructions will be for Windows, as the specific instructions can vary greatly depending on your Linux Distro.
+Many of the following instructions will require use of a terminal. While it is possible to perform these operations purely within a Graphical User Interface (GUI), you will find that you will often run into programs and tools that have no UI, and must be run via a command line interface (CLI), or even if there is a UI, it would be faster to type the necessary commands. The following instructions will be for Windows, as the specific instructions can vary greatly depending on your Linux Distro.
 
 If you are unused to using the terminal here is a brief [introduction](https://www.freecodecamp.org/news/command-line-for-beginners/).
 
@@ -28,20 +28,20 @@ We will use the utility `winget` to install the required programs.
 winget --version
 ```
 
-First we will install [Git](https://git-scm.com/), a version control.
+First, we will install [Git](https://git-scm.com/), a version control system.
 
 ```shell
 winget install Git.Git
 ```
 
-Next we will install a c++ development environment. On Windows developers have the option to either use [MSYS2](https://www.msys2.org/) which creates and Unix-like development environment, [Windows-Subsystem-for-Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install) which creates an actual Linux system that runs on-top of Windows, or [Microsoft's C++ Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022). If you wish to develop as if you are on Linux, WSL is an option, but we will continue with the Build Tools. While all 3 can be used with VS Code, the build tools can also be used with Microsoft's [Visual Studio](https://visualstudio.microsoft.com/downloads), which provides a fully integrated development environment. While we are at it we will also install [VSCode](https://visualstudio.microsoft.com/downloads)
+Next, we will install a C++ development environment. On Windows, developers have the option to either use [MSYS2](https://www.msys2.org/), which creates a Unix-like development environment, [Windows-Subsystem-for-Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install), which creates an actual Linux system that runs on top of Windows, or [Microsoft's C++ Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022). If you wish to develop as if you are on Linux, WSL is an option, but we will continue with the Build Tools. While all three can be used with VS Code, the build tools can also be used with Microsoft's [Visual Studio](https://visualstudio.microsoft.com/downloads), which provides a fully integrated development environment. While we're at it, we will also install [VS Code](https://visualstudio.microsoft.com/downloads)
 
 ```shell
 winget install Microsoft.VisualStudio.2022.BuildTools
 winget install Microsoft.VisualStudioCode
 ```
 
-With the installation of the build tools you now have two new terminals installed. These are the `Developer Powershell for VS 2022` & `Developer Command Prompt for VS 2022` The c++ development tools are only available while using one of these new terminals. Open one of the terminals and check that your tools are properly installed
+With the installation of the build tools, you now have two new terminals installed. These are the `Developer Powershell for VS 2022` and `Developer Command Prompt for VS 2022`. The C++ development tools are only available while using one of these new terminals. Open one of the terminals and check that your tools are properly installed
 
 ```shell
 cl
