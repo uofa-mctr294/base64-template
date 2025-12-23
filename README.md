@@ -118,3 +118,11 @@ build\Debug\hello_world.exe
 ctest --test-dir build -C Debug
 Add -V for verbose testing
 ```
+
+## Assignment
+
+After you have finished these steps switch to the `base64` branch for part 2 of this assignment
+
+``` shell
+git switch base64
+```
