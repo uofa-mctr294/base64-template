@@ -1,113 +1,71 @@
-# hello-world
+# base64 decoder and image display
+
+## Introduction
+
+You will often have to interact with data of various formats depending on the application,
+and for the sake of compuatational and storage efficiency those formats will often not be
+human readable.
+
+Base64 is an encoding format to turn bytes (8 bit numbers) onto ASCII text
+characters and back.
+
+HTML is a standardized document format meant to dicate and describe the content of webpages. It is often used alongside CSS, which determines stylization, and Javascript which provides scripting and programming capabilites.
 
 ## Requirements
 
-- Git
-- C++ Compiler (gcc, clang, msvc)
-- CMake
+Parse a base64 encoded file and make a webpage with the resulting image.
 
-## Installation
+Write a library with 4 functions. These functions are defined in [base64.hpp](src/base64.hpp).
 
-Setting up a C++ development environment can be non-trivial. The course is set up so that most relatively standard development environments will work fine, whether you are using Windows or Linux. Nor do we prescribe that you use a specific editor or that you use an editor at all! However for simplicity here we give instructions on how to use VS Code as your editor and setup a C++ development in Linux or Windows. Microsoft provides a thorough [set of instructions](https://code.visualstudio.com/docs/languages/cpp), but here we will go through some basics and the most pertinent set of instructions.
+`readArguments` will accept the program arguments. The first program argument is the filepath to the file containing the base64 text. It may be relative or absolute, and the contents of the file will be returned as a string via the base64 argument. The second program argument will be the desired output file for the html file.
 
-### Terminal Basics
+`parseB64` will parse an base64 string and produce the corresponding byte stream
 
-Many of the following instructions will require use of a terminal. While it is possible to perform these operations purely within a Graphical User Interface (GUI), you will find that you will often run into programs and tools that have no UI, and must be run via a command line interface (CLI), or even if there is a UI, it would be faster to type the necessary commands. The following instructions will be for Windows, as the specific instructions can vary greatly depending on your Linux Distro.
+`getImageInfo` will call an image info library and retrieve the image's width, height, and a suitable file extension. It will combine the file extension with the original filepath of the base64 data to get a filename for the output image.
 
-If you are unused to using the terminal here is a brief [introduction](https://www.freecodecamp.org/news/command-line-for-beginners/).
+`createHtml` will take the image info a create an HTML page that can display the image. Here is a template for the page:
 
-### Setup
-
-#### Windows
-
-On Windows for this first part you can use either Command Prompt or Powershell as your terminal, which can both be accessed via `Windows Terminal`. Both are acceptable but I would suggest using Powershell.
-
-We will use the utility `winget` to install the required programs.
-
-```shell
-winget --version
+```html
+    <!DOCTYPE html>
+    <html>
+      <body>
+        <h1>Image Title</h1>
+        <img src="imageFilename.jpg" alt="image caption" height=100 width=100>
+        <p>File: imageFilename.jpg size: 100x100</p>
+      </body>
+    </html>
 ```
 
-First, we will install [Git](https://git-scm.com/), a version control system.
+## Testing Requirements
 
-```shell
-winget install Git.Git
-```
+- For the sake of testing we require that all your source files are placed in `src`.
+- We also require that nothing in `tests/test_base64.cpp` and `src/base64.hpp` is removed. You may feel free to add to these files or add additional files to these directory, as long as testing continues to build and run. Any additional changes may require you to make changes to `CMakeLists.txt`
+- We expect that your html page mostly matches the html provided. We will be searching it to find some key values/tags
 
-Next, we will install a C++ development environment. On Windows, developers have the option to either use [MSYS2](https://www.msys2.org/), which creates a Unix-like development environment, [Windows-Subsystem-for-Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install), which creates an actual Linux system that runs on top of Windows, or [Microsoft's C++ Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022). If you wish to develop as if you are on Linux, WSL is an option, but we will continue with the Build Tools. While all three can be used with VS Code, the build tools can also be used with Microsoft's [Visual Studio](https://visualstudio.microsoft.com/downloads), which provides a fully integrated development environment. While we're at it, we will also install [VS Code](https://visualstudio.microsoft.com/downloads)
+## Hints
 
-```shell
-winget install Microsoft.VisualStudio.2022.BuildTools
-winget install Microsoft.VisualStudioCode
-```
+- To learn about base 64 encoding, you can use sources such as wikipedia or [understanding_base64](
+<https://www.sunshine2k.de/articles/coding/base64/understanding_base64.html>)
 
-With the installation of the build tools, you now have two new terminals installed. These are the `Developer Powershell for VS 2022` and `Developer Command Prompt for VS 2022`. The C++ development tools are only available while using one of these new terminals. Open one of the terminals and check that your tools are properly installed
-
-```shell
-cl
-```
-
-```shell
-code -v
-```
-
-With everything setup we will make a folder to place some new projects, you could do this in Windows Explorer, but let's continue using the terminal. We will also get the this repository
-
-```shell
-cd ~
-mkdir Repos/School/mctr294
-cd Repos/School/mctr294
-git clone https://github.com/mctr294-2026/lab-1-UserName helloWorld
-code helloWorld
-```
-
-#### Linux
-
-On Linux, use your distribution's package manager to install the required tools. The examples below use `apt` (for Debian/Ubuntu-based systems), but you can substitute with `dnf` (Fedora), `pacman` (Arch), or your system's equivalent.
-
-First, update your package list:
-
-```shell
-sudo apt update
-```
-
-Install Git, g++ compiler, CMake, and VS Code:
-
-```shell
-sudo apt install git g++ cmake
-```
-
-For VS Code, you can either download it from the [official website](https://code.visualstudio.com/) or install it via snap:
-
-```shell
-sudo snap install --classic code
-```
-
-Verify the installations:
-
-```shell
-git --version
-g++ --version
-cmake --version
-code --version
-```
-
-With everything setup, create a folder for your projects and clone this repository:
-
-```shell
-cd ~
-mkdir -p Repos/School/mctr294
-cd Repos/School/mctr294
-git clone https://github.com/mctr294-2026/lab-1-UserName helloWorld
-code helloWorld
-```
+- It is suggested that you use the following third-party dependency to obtain the width and height of the image:
+[ImageInfo](https://github.com/xiaozhuai/imageinfo.git)
 
 ## Building
 
+In the guessing-game lab you were given build instructions similar to the ones below.
+
 ```shell
-cmake -S . -B build
+cmake -S . -B build -DIMAGEINFO_INCLUDE_DIR=<imageinfo>
 cmake --build build --config Debug
-build\Debug\hello_world.exe
+build\Debug\base64.exe images\minions\happy-minions.b64 output\index.html
+```
+
+where <imageinfo> is the place where you've checked out ImageInfo
+
+Example:
+
+```shell
+cmake -S . -B build -DIMAGEINFO_INCLUDE_DIR=extern/imageinfo/include
 ```
 
 ## Testing
