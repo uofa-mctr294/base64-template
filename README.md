@@ -55,9 +55,10 @@ Write a library with 4 functions. These functions are defined in [base64.hpp](sr
 In the guessing-game lab you were given build instructions similar to the ones below.
 
 ```shell
-cmake -S . -B build -DIMAGEINFO_INCLUDE_DIR=<imageinfo>
+cmake -S . -B build -DIMAGEINFO_INCLUDE_DIR=<imageinfo>/include
 cmake --build build --config Debug
-build\Debug\b64decode.exe images\minions\happy-minions.b64 output\index.html
+build\Debug\base64.exe images\uofa\uofa.b64 tests\index.html
+# open tests\index.html in your browser to see if it worked!
 ```
 
 where <imageinfo> is the place where you've checked out ImageInfo
