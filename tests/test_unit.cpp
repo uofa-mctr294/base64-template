@@ -19,12 +19,10 @@ static std::string read_file_to_string(const std::string &path)
 
 TEST(Base64UnitTest, ParseB64DecodesToRawBytes)
 {
-#if 0
     std::string input = "QUJD"; // base64 for "ABC"
     std::vector<uint8_t> bytes = parseB64(input);
     ASSERT_EQ(bytes.size(), 3u);
     EXPECT_EQ(std::string(bytes.begin(), bytes.end()), std::string("ABC", 3));
-#endif
 }
 
 TEST(Base64UnitTest, CreateHtmlContainsFilenameAndSize)
@@ -35,14 +33,12 @@ TEST(Base64UnitTest, CreateHtmlContainsFilenameAndSize)
     info.imageFilePath = "/some/path/unit_image.gif";
     info.width = 1;
     info.height = 1;
-#if 0
     std::string html = createHtml(info);
     EXPECT_NE(html.find("src=\"" + info.imageFileName + "\""), std::string::npos);
     EXPECT_NE(html.find("File: " + info.imageFileName), std::string::npos);
     EXPECT_NE(html.find("height=1"), std::string::npos);
     EXPECT_NE(html.find("width=1"), std::string::npos);
     EXPECT_NE(html.find("size: 1x1"), std::string::npos);
-#endif
 }
 
 TEST(Base64UnitTest, ReadArgumentsReadsInputAndSetsOutput)
@@ -64,11 +60,9 @@ TEST(Base64UnitTest, ReadArgumentsReadsInputAndSetsOutput)
 
     std::string base64;
     std::string htmlFilename;
-#if 0
     int rc = readArguments((int)argv.size(), argv.data(), &base64, &htmlFilename);
     ASSERT_EQ(rc, 0);
     EXPECT_EQ(base64, "TESTB64");
     EXPECT_EQ(htmlFilename, outPath);
-#endif
     std::remove(inPath.c_str());
 }
